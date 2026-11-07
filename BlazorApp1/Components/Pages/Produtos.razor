@@ -4,17 +4,25 @@
 <h3>Produtos</h3>
 <div class="row">
     <div class="col-md-4">
+        
         <div class="card card-body">
-            <label class="form0label">Nome</label>
-            <input class="form-control" @bind="nome" placeholder="Nome"/>
-            
-            <label class="form0label">Quantidade</label>
-            <input class="form-control" type="number" @bind="quantidade" placeholder="Quantidade"/>
-            
-            <label class="form0label">Preço</label>
-            <input class="form-control" type="number" step="0.01" @bind="preco" placeholder="Preço"/>
-            
-            <button class="btn btn-primary" @onclick="AdicionarProduto">Adicionar Produto</button>
+            <EditForm Model="produto" OnValidSubmit="AdicionarProduto">
+                <DataAnnotationsValidator />
+                
+                <label class="form0label">Nome</label>
+                <InputText class="form-control" @bind-Value="produto.Nome" placeholder="Nome"/>
+                <ValidationMessage For="() => produto.Nome" />
+                <br>
+                <label class="form0label">Quantidade</label>
+                <InputNumber class="form-control" type="number" @bind-Value="produto.Quantidade" placeholder="Quantidade"/>
+                <br>
+                <label class="form0label">Preço</label>
+                <InputNumber class="form-control" type="number" step="0.01" @bind-Value="produto.Preco" placeholder="Preço"/>
+                <ValidationMessage For="() => produto.Preco" />
+                <br>
+                <button class="btn btn-primary" type="submit" >Adicionar Produto</button>
+                
+            </EditForm>   
         </div>
     </div>
     
@@ -52,23 +60,19 @@
     </div>
 </div>
 @code {
-    private string nome = "";
-    private int quantidade;
-    private decimal preco;
-
+    private Produto produto = new();
+    
     private List<Produto> produtos = new();
 
     private void AdicionarProduto()
     {
-        produtos.Add(new Produto 
+        produtos.Add(new Produto
         {
-            Nome = nome,
-            Preco = preco,
-            Quantidade = quantidade
+            Nome = produto.Nome,
+            Preco = produto.Preco,
+            Quantidade = produto.Quantidade
         });
 
-        nome = "";
-        preco = 0;
-        quantidade = 1;
+        produto = new Produto();
     }
 }

@@ -6,15 +6,21 @@
 <div class="row">
     <div class="col-md-4">
         <div class="card card-body">
-            <label class="form0label">Nome</label>
-            <input class="form-control" @bind="nome" placeholder="Nome"/>
+            <EditForm Model="categoria" OnValidSubmit="AdicionarCategoria">
+                <DataAnnotationsValidator />
+
+                <label class="form0label">Nome</label>
+                <InputText class="form-control" @bind-Value="categoria.Nome" placeholder="Nome"/>
+                <ValidationMessage For="() => categoria.Nome" />  
                 
-            <label class="form0label">Quantidade</label>
-            <input class="form-control" type="number" @bind="quantidade" placeholder="Quantidade"/>
+                <label class="form0label">Quantidade</label>
+                <InputNumber class="form-control" type="number" @bind-Value="categoria.Quantidade" placeholder="Quantidade"/>
+                <ValidationMessage For="() => categoria.Quantidade" />  
                 
-                     
-            <button class="btn btn-primary" @onclick="AdicionarCategoria">Adicionar</button>
+                <button class="btn btn-primary" type="submit">Adicionar</button>
+            </EditForm>
         </div>
+        
     </div>
 
     <div class="col-md-4">
@@ -49,9 +55,7 @@
 
 @code{
 
-    
-    private string nome = "";
-    private int quantidade;
+    private Categoria categoria = new();
 
     private List<Categoria> categorias = new();
 
@@ -59,12 +63,12 @@
     {
         categorias.Add(new Categoria
         {
-            Nome = nome,
-            Quantidade = quantidade
+            Nome = categoria.Nome,
+            Quantidade = categoria.Quantidade
         });
 
-        nome = "";
-        quantidade = 1;
+        categoria = new Categoria();
+
     }
 
 }

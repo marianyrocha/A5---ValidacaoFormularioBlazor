@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="Components\Pages\Produtos\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Components\Pages\Produtos\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Components\Pages\Produtos\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Components\Pages\Produtos\**" />
+    </ItemGroup>
+
+</Project>

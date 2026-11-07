@@ -1,0 +1,70 @@
+@page "/categorias"
+@using BlazorApp1.Components.Models
+
+<h3>Categorias</h3>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card card-body">
+            <label class="form0label">Nome</label>
+            <input class="form-control" @bind="nome" placeholder="Nome"/>
+                
+            <label class="form0label">Quantidade</label>
+            <input class="form-control" type="number" @bind="quantidade" placeholder="Quantidade"/>
+                
+                     
+            <button class="btn btn-primary" @onclick="AdicionarCategoria">Adicionar</button>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if(categorias.Count==0)
+            {
+                <p class="text-muted">Nenuma categoria</p>
+                        
+            }
+            else
+            {
+                @foreach (var c in categorias)
+                {
+                    <tr>
+                        <td>@c.Nome</td>
+                        <td>@c.Quantidade</td>
+                    </tr>
+                }
+            }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+@code{
+
+    
+    private string nome = "";
+    private int quantidade;
+
+    private List<Categoria> categorias = new();
+
+    private void AdicionarCategoria()
+    {
+        categorias.Add(new Categoria
+        {
+            Nome = nome,
+            Quantidade = quantidade
+        });
+
+        nome = "";
+        quantidade = 1;
+    }
+
+}

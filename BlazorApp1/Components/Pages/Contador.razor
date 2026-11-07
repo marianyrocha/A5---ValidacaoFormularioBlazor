@@ -1,0 +1,19 @@
+﻿@page "/contador"
+
+<PageTitle>Contador</PageTitle>
+
+<h1>Contador</h1>
+
+<p role="status">Contador: @contador</p>
+
+<button class="btn btn-primary" @onclick="Contar">Clique aqui</button>
+
+@code {
+    private int contador = 0;
+
+    private void Contar()
+    {
+        contador++;
+    }
+
+}
